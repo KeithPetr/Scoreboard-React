@@ -10,12 +10,13 @@ export default function Champion(props) {
     onAddOne,
     onAddTwo,
     onAddThree,
+    leader
   } = props;
 
   return (
     <div className="champion-side">
       <h1 className="title">Champion</h1>
-      <div className="score-display">{championScore}</div>
+      <div className={`score-display ${leader ? 'leader' : ''}`}>{championScore}</div>
       <div className="score-inputs">
         <button onClick={onAddOne} className="score-btn">
           +{randNumOne}

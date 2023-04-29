@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NewGameButton from './NewGameButton';
 import Champion from './Champion';
 import Challenger from './Challenger';
@@ -6,12 +6,28 @@ import Challenger from './Challenger';
 function App() {
   const [challengerScore, setChallengerScore] = useState(0);
   const [championScore, setChampionScore] = useState(0);
+  const [leader, setLeader] = useState(null);
   const [randNumOne, setRandNumOne] = useState(0);
   const [randNumTwo, setRandNumTwo] = useState(0);
   const [randNumThree, setRandNumThree] = useState(0);
   const [randNumFour, setRandNumFour] = useState(0);
   const [randNumFive, setRandNumFive] = useState(0);
   const [randNumSix, setRandNumSix] = useState(0);
+
+  function highlight() {
+    if (championScore > challengerScore) {
+      setLeader('champion'); // set champion as the leader
+    } else if (challengerScore > championScore) {
+      setLeader('challenger'); // set challenger as the leader
+    } else {
+      setLeader(null); // reset leader if scores are equal
+    }
+  }
+
+  useEffect(() => {
+    highlight();
+  }, [championScore, challengerScore]);
+  
 
   function reset() {
     setChallengerScore(0);
@@ -22,6 +38,7 @@ function App() {
     setRandNumFour(0);
     setRandNumFive(0);
     setRandNumSix(0);
+    setLeader(null)
   }
 
   return (
@@ -41,6 +58,7 @@ function App() {
           onAddOne={() => setChampionScore(championScore + randNumOne)}
           onAddTwo={() => setChampionScore(championScore + randNumTwo)}
           onAddThree={() => setChampionScore(championScore + randNumThree)}
+          leader={leader === 'champion'}
         />
         <Challenger
           challengerScore={challengerScore}
@@ -55,6 +73,7 @@ function App() {
           onAddOne={() => setChallengerScore(challengerScore + randNumFour)}
           onAddTwo={() => setChallengerScore(challengerScore + randNumFive)}
           onAddThree={() => setChallengerScore(challengerScore + randNumSix)}
+          leader={leader === 'challenger'}
         />
       </div>
     </div>

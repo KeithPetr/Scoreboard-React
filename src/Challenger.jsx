@@ -10,12 +10,13 @@ export default function Challenger(props) {
         onAddOne,
         onAddTwo,
         onAddThree,
+        leader
       } = props;
 
   return (
     <div className="challenger-side">
       <h1 className="title">Challenger</h1>
-      <div className="score-display">{challengerScore}</div>
+      <div className={`score-display ${leader ? 'leader' : ''}`}>{challengerScore}</div>
       <div className="score-inputs">
         <button onClick={onAddOne} className="score-btn">
           +{randNumFour}

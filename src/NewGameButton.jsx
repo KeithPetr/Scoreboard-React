@@ -1,5 +1,5 @@
-export default function NewGameButton() {
+export default function NewGameButton(props) {
     return (
-        <button className="normal-button" id="new-game-btn">New Game</button>
+        <button onClick={props.onClick} className="normal-button" id="new-game-btn">New Game</button>
     )
 }

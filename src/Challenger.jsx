@@ -1,46 +1,37 @@
-import React, { useState } from 'react'
+import React from "react";
 
-export default function Challenger() {
-    const [challengerScore, setChallengerScore] = useState(0) 
-    const [randNumFour, setRandNumFour] = useState(0)
-    const [randNumFive, setRandNumFive] = useState(0)
-    const [randNumSix, setRandNumSix] = useState(0)
-
-    function challengerGenerateRandomNumber() {
-        setRandNumFour(Math.ceil(Math.random() * 10));
-        setRandNumFive(Math.ceil(Math.random() * 10));
-        setRandNumSix(Math.ceil(Math.random() * 10));
-      }
-
-    function challengerAddOne() {
-        setChallengerScore(prevScore => prevScore + randNumFour)
-    }
-    function challengerAddTwo() {
-        setChallengerScore(prevScore => prevScore + randNumFive)
-    }
-    function challengerAddThree() {
-        setChallengerScore(prevScore => prevScore + randNumSix)
-    }
-
+export default function Challenger(props) {
+    const {
+        challengerScore,
+        randNumFour,
+        randNumFive,
+        randNumSix,
+        onGenerateRandomNumber,
+        onAddOne,
+        onAddTwo,
+        onAddThree,
+      } = props;
 
   return (
     <div className="challenger-side">
       <h1 className="title">Challenger</h1>
-      <div className="score-display">
-        {challengerScore}
-      </div>
+      <div className="score-display">{challengerScore}</div>
       <div className="score-inputs">
-        <button onClick={challengerAddOne} className="score-btn">
+        <button onClick={onAddOne} className="score-btn">
           +{randNumFour}
         </button>
-        <button onClick={challengerAddTwo} className="score-btn">
+        <button onClick={onAddTwo} className="score-btn">
           +{randNumFive}
         </button>
-        <button onClick={challengerAddThree} className="score-btn">
+        <button onClick={onAddThree} className="score-btn">
           +{randNumSix}
         </button>
       </div>
-      <button onClick={challengerGenerateRandomNumber} className="normal-button" id="challenger-generate-btn">
+      <button
+        onClick={onGenerateRandomNumber}
+        className="normal-button"
+        id="challenger-generate-btn"
+      >
         Generate
       </button>
     </div>
